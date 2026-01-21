@@ -36,7 +36,7 @@ Build the C library + headers w/`go build -buildmode=c-archive`.
 - [ ] global
     - [X] DirInit(preserveOldCfgDir bool) (string, error)
     - [ ] ~~GenDeviceIDList() ([]fs.DirEntry, error)~~
-    - [ ] GetCurrentDeviceID() (string, error)
+    - [X] GetCurrentDeviceID() (string, error)
     - [ ] GetRealAgePath(vanityPath string) string
     - [ ] GetRealPath(vanityPath string) string
     - [ ] GetSysProcAttr() *syscall.SysProcAttr
