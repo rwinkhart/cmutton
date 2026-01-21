@@ -36,4 +36,28 @@ func GetCurrentDeviceID() (*C.char, *C.char) {
 	return C.CString(currentDeviceID), nil
 }
 
+// GetRealAgePath returns:
+// realAgePath
+//
+//export GetRealAgePath
+func GetRealAgePath(vanityPath *C.char) *C.char {
+	return C.CString(global.GetRealAgePath(C.GoString(vanityPath)))
+}
+
+// GetRealPath returns:
+// realPath
+//
+//export GetRealPath
+func GetRealPath(vanityPath *C.char) *C.char {
+	return C.CString(global.GetRealPath(C.GoString(vanityPath)))
+}
+
+// GetVanityPath returns:
+// vanityPath
+//
+//export GetVanityPath
+func GetVanityPath(realPath *C.char) *C.char {
+	return C.CString(global.GetVanityPath(C.GoString(realPath)))
+}
+
 func main() {}

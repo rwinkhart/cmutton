@@ -37,10 +37,10 @@ Build the C library + headers w/`go build -buildmode=c-archive`.
     - [X] DirInit(preserveOldCfgDir bool) (string, error)
     - [ ] ~~GenDeviceIDList() ([]fs.DirEntry, error)~~
     - [X] GetCurrentDeviceID() (string, error)
-    - [ ] GetRealAgePath(vanityPath string) string
-    - [ ] GetRealPath(vanityPath string) string
-    - [ ] GetSysProcAttr() *syscall.SysProcAttr
-    - [ ] GetVanityPath(realPath string) string
+    - [X] GetRealAgePath(vanityPath string) string
+    - [X] GetRealPath(vanityPath string) string
+    - [ ] ~~GetSysProcAttr() *syscall.SysProcAttr~~
+    - [X] GetVanityPath(realPath string) string
 - [ ] syncclient
     - [ ] AddFolderRemote(vanityPath string) error
     - [ ] GenDeviceID(oldDeviceID, prefix string) (string, string, bool, error)
