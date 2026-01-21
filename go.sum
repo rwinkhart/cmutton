@@ -1,0 +1,6 @@
+github.com/rwinkhart/go-boilerplate v0.1.1 h1:C+yyscGWeqvNpR91iw0i91zqX0LcxnCr1VOyT7iM4JY=
+github.com/rwinkhart/go-boilerplate v0.1.1/go.mod h1:/NVRKGslU20E5xU5YOgXzWxA6aa94BMtv5MtHRTb5Ek=
+github.com/rwinkhart/libmutton v0.4.3-0.20260111043639-f82b35bc4398 h1:QufX3nG3H1N986Xh7NZWsVELxmGms1yhNP7/fejBeHY=
+github.com/rwinkhart/libmutton v0.4.3-0.20260111043639-f82b35bc4398/go.mod h1:qInUv19lzX1adFNI6Ih/IEVy+pktSTh/yA7cRTdVPH8=
+golang.org/x/sys v0.40.0 h1:DBZZqJ2Rkml6QMQsZywtnjnnGvHza6BTfYFWY9kjEWQ=
+golang.org/x/sys v0.40.0/go.mod h1:OgkHotnGiDImocRcuBABYBEXf8A9a87e/uXjp9XT3ks=
