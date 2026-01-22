@@ -1,12 +1,10 @@
 package main
 
-/*
-typedef struct {
-    char* data;
-    int len;
-} PascalString;
-*/
+// #include <string.h>
+// #include <stdlib.h>
+// #include "types.h"
 import "C"
+import "unsafe"
 
 // getPascalString returns a pascal
 // string struct for the input Go string.
@@ -27,4 +25,25 @@ func getPascalStringFromBytes(goBytes []byte) C.PascalString {
 		data: (*C.char)(goBytesPtr),
 		len:  C.int(len(goBytes)),
 	}
+}
+
+// GetPascalStringFromCString is a helper meant to be used from C.
+//
+//export GetPascalStringFromCString
+func GetPascalStringFromCString(cString *C.char) C.PascalString {
+	return C.PascalString{
+		data: cString,
+		len:  C.int(C.strlen(cString)),
+	}
+}
+
+// FreeArray frees the memory allocated by a C-allocated array.
+//
+//export FreeArray
+func FreeArray(items *C.PascalString, count C.int) {
+	linesSlice := (*[1 << 30]C.PascalString)(unsafe.Pointer(items))[:count:count]
+	for i := 0; i < int(count); i++ {
+		C.free(unsafe.Pointer(linesSlice[i].data))
+	}
+	C.free(unsafe.Pointer(items))
 }

@@ -1,12 +1,7 @@
 package main
 
-/*
-#include <stdlib.h>
-typedef struct {
-    char* data;
-    int len;
-} PascalString;
-*/
+// #include <stdlib.h>
+// #include "types.h"
 import "C"
 import (
 	"github.com/rwinkhart/libmutton/global"
