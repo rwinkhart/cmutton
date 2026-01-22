@@ -94,8 +94,7 @@ int main() {
     - [X] DecryptFileToSlice(realPath string) ([]string, error)
     - [X] EncryptBytes(decBytes []byte) []byte
     - [X] ~~RCWDArgument()~~ (RCWD not supported)
-- [ ] global
-    - [ ] Address TODOs
+- [X] global
     - [X] ~~VAR (CB func): GetPassword~~ (RCWD not supported)
     - [X] DirInit(preserveOldCfgDir bool) (string, error)
     - [X] ~~GenDeviceIDList() ([]fs.DirEntry, error)~~ (not for use outside of libmutton)

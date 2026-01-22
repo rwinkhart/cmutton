@@ -7,12 +7,10 @@ import (
 	"github.com/rwinkhart/libmutton/global"
 )
 
-// TODO Use a nil pointer for blank deviceIDs, not FSMisc (requires changes to libmutton)
-
 // DirInit returns:
 // r0: err
 //
-// r1: oldDeviceID (FSMisc if none)
+// r1: oldDeviceID (nil w/-1 length if none present)
 //
 //export DirInit
 func DirInit(preserveOldCfgDir bool) (*C.char, C.PascalString) {
@@ -20,13 +18,16 @@ func DirInit(preserveOldCfgDir bool) (*C.char, C.PascalString) {
 	if err != nil {
 		return C.CString(err.Error()), C.PascalString{data: nil, len: 0}
 	}
-	return nil, getPascalString(oldDeviceID)
+	if oldDeviceID != nil {
+		return nil, getPascalString(*oldDeviceID)
+	}
+	return nil, C.PascalString{data: nil, len: -1}
 }
 
 // GetCurrentDeviceID returns:
 // r0: err
 //
-// r1: currentDeviceID (FSMisc if none)
+// r1: currentDeviceID (nil w/-1 length if none present)
 //
 //export GetCurrentDeviceID
 func GetCurrentDeviceID() (*C.char, C.PascalString) {
@@ -34,7 +35,10 @@ func GetCurrentDeviceID() (*C.char, C.PascalString) {
 	if err != nil {
 		return C.CString(err.Error()), C.PascalString{data: nil, len: 0}
 	}
-	return nil, getPascalString(currentDeviceID)
+	if currentDeviceID != nil {
+		return nil, getPascalString(*currentDeviceID)
+	}
+	return nil, C.PascalString{data: nil, len: -1}
 }
 
 // GetRealAgePath returns:

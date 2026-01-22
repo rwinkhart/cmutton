@@ -2,6 +2,8 @@ github.com/Microsoft/go-winio v0.6.2 h1:F2VQgta7ecxGYO8k3ZZz3RS8fVIXVxONVUPlNERo
 github.com/Microsoft/go-winio v0.6.2/go.mod h1:yd8OoFMLzJbo9gZq8j5qaps8bJ9aShtEA8Ipt1oGCvU=
 github.com/rwinkhart/go-boilerplate v0.1.1 h1:C+yyscGWeqvNpR91iw0i91zqX0LcxnCr1VOyT7iM4JY=
 github.com/rwinkhart/go-boilerplate v0.1.1/go.mod h1:/NVRKGslU20E5xU5YOgXzWxA6aa94BMtv5MtHRTb5Ek=
+github.com/rwinkhart/libmutton v0.4.3-0.20260121234916-409db78d836b h1:aG/6pb3bumQhdAE0oyjlOeiUujMoRq6509HYWmcMBCs=
+github.com/rwinkhart/libmutton v0.4.3-0.20260121234916-409db78d836b/go.mod h1:++8vRtgE/9oAtYHlMISk6aE9ijzZleiy6d82Z7NhQ/0=
 github.com/rwinkhart/peercred-mini v0.1.2 h1:4cGWDbv0whvLeVvbUdx84V/9p+2fS+DEXgrA1KxlRFo=
 github.com/rwinkhart/peercred-mini v0.1.2/go.mod h1:LLHG7YshHEpbpJJP+Il9nx2dnGj5O3VGE32rWmflj0c=
 github.com/rwinkhart/rcw v0.2.4 h1:FrRSsl+ui1WLmDwqjLSROtFPKqSeGLEfF2SPENt4qP0=
