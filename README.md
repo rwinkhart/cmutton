@@ -79,7 +79,6 @@ int main() {
     - [ ] Write(cfg *CfgT, appendMode bool) error
     - [ ] Load() (*CfgT, error)
 - [ ] core
-    - [ ] ClampTrailingWhitespace(note []string)
     - [ ] EntryAddPrecheck(realPath string) (uint8, error)
     - [ ] EntryIsNotEmpty(entryData []string) bool
     - [ ] EntryRefresh(oldRCWPassword, newRCWPassword []byte, removeOldDir bool) error
@@ -88,8 +87,7 @@ int main() {
     - [ ] LibmuttonInit(inputCB func(prompt string) string, rcwPassword []byte, ...) error
     - [ ] RCWSanityCheckGen(password []byte) error
     - [ ] WriteEntry(realPath string, decSlice []string, passwordIsNew bool, rcwPassword []byte) error
-- [ ] crypt
-    - [ ] Address TODOs
+- [X] crypt
     - [X] ~~VAR: RetryPassword bool~~ (RCWD not supported)
     - [X] DecryptFileToSlice(realPath string) ([]string, error)
     - [X] EncryptBytes(decBytes []byte) []byte

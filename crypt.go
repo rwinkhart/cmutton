@@ -10,8 +10,6 @@ import (
 	"github.com/rwinkhart/rcw/wrappers"
 )
 
-// TODO investigate username+password only entries still having blank lines at the end when decrypted
-
 // DecryptFileToSlice returns:
 // r0: err
 //
