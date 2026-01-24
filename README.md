@@ -64,10 +64,10 @@ int main() {
 ```
 
 # Progress
-- [ ] age
-    - [ ] AllPasswordEntries(forceReage bool, rcwPassword []byte) error
-    - [ ] Entry(vanityPath string, timestamp int64) error
-    - [ ] TranslateAgeTimestamp(timestamp *int64) uint8
+- [X] age
+    - [X] AllPasswordEntries(forceReage bool, rcwPassword []byte) error
+    - [X] Entry(vanityPath string, timestamp int64) error
+    - [X] TranslateAgeTimestamp(timestamp *int64) uint8
 - [ ] clip
     - [ ] ClearArgument() error
     - [ ] ClearProcess(assignedContents string) error
