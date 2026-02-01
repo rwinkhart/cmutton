@@ -7,7 +7,10 @@ to export to C.
 
 # Usage
 ### Building
+#### Generic
 `go build -buildmode=c-archive`.
+#### Apple Platforms (iOS/iOS Simulator/MacOS)
+If building for Apple platforms, use the `Makefile` in the `xcode` directory.
 ### Functions
 All relevant exported libmutton functions have C counterparts with similar names.
 Functions with multiple return values all have CGO-generated structs to store the return values.
