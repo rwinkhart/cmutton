@@ -14,8 +14,7 @@ import (
 //
 //export ClearProcess
 func ClearProcess(assignedContents C.PascalString) *C.char {
-	err := clip.ClearProcess(C.GoStringN(assignedContents.data, assignedContents.len))
-	if err != nil {
+	if err := clip.ClearProcess(C.GoStringN(assignedContents.data, assignedContents.len)); err != nil {
 		return C.CString(err.Error())
 	}
 	return nil
@@ -26,8 +25,7 @@ func ClearProcess(assignedContents C.PascalString) *C.char {
 //
 //export CopyShortcut
 func CopyShortcut(realPath C.PascalString, field int, rcwPassword C.PascalString) *C.char {
-	err := clip.CopyShortcut(C.GoStringN(realPath.data, realPath.len), field, []byte(C.GoStringN(rcwPassword.data, rcwPassword.len)))
-	if err != nil {
+	if err := clip.CopyShortcut(C.GoStringN(realPath.data, realPath.len), field, []byte(C.GoStringN(rcwPassword.data, rcwPassword.len))); err != nil {
 		return C.CString(err.Error())
 	}
 	return nil
@@ -38,8 +36,7 @@ func CopyShortcut(realPath C.PascalString, field int, rcwPassword C.PascalString
 //
 //export CopyString
 func CopyString(clearClipboardAutomatically bool, copySubject C.PascalString) *C.char {
-	err := clip.CopyString(clearClipboardAutomatically, C.GoStringN(copySubject.data, copySubject.len))
-	if err != nil {
+	if err := clip.CopyString(clearClipboardAutomatically, C.GoStringN(copySubject.data, copySubject.len)); err != nil {
 		return C.CString(err.Error())
 	}
 	return nil

@@ -103,13 +103,13 @@ int main() {
     - [X] ~~GetSysProcAttr() *syscall.SysProcAttr~~ (not for use outside of libmutton)
     - [X] GetVanityPath(realPath string) string
 - [ ] syncclient
-    - [ ] AddFolderRemote(vanityPath string) error
-    - [ ] GenDeviceID(oldDeviceID, prefix string) (string, string, bool, error)
-    - [ ] GetSSHClient() (*ssh.Client, bool, *bool, *string, *string, error)
-    - [ ] GetSSHOutput(sshClient *ssh.Client, cmd, stdin string) ([]byte, error)
-    - [ ] RenameRemote(oldVanityPath, newVanityPath string) error
-    - [ ] ShearRemote(vanityPath string, onlyShearAgeFile bool) error
-    - [ ] RunJob() (*syncListsT, error)
+    - [X] AddFolderRemote(vanityPath string) error
+    - [X] GenDeviceID(oldDeviceID, prefix string) (string, string, bool, error)
+    - [X] ~~GetSSHClient() (*ssh.Client, bool, *bool, *string, *string, error)~~ (not for use outside of libmutton)
+    - [X] ~~GetSSHOutput(sshClient *ssh.Client, cmd, stdin string) ([]byte, error)~~ (not for use outside of libmutton)
+    - [X] RenameRemote(oldVanityPath, newVanityPath string) error
+    - [X] ShearRemote(vanityPath string, onlyShearAgeFile bool) error
+    - [X] RunJob() (*syncListsT, error)
 - [X] synccommon
     - [X] ~~AddFolderLocal(vanityPath string) error~~ (not for use outside of libmutton)
     - [X] ~~RenameLocal(oldVanityPath, newVanityPath string) error~~ (not for use outside of libmutton)
