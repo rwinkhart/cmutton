@@ -116,6 +116,6 @@ int main() {
     - [X] ~~ShearAgeFileLocal(vanityPath string) error~~ (not for use outside of libmutton)
     - [X] ~~ShearLocal(vanityPath, clientDeviceID string, onlyShearAgeFile bool) (string, bool, error)~~ (not for use outside of libmutton)
     - [X] WalkEntryDir() ([]string, []string, error)
-    - [X] ~~GetAllEntryData() (EntryMapT, error)~~ (not easy to port to C; also not needed)
+    - [X] GetAllEntryData() (EntryMapT, error)
 - [ ] syncserver
     - [ ] GetRemoteDataFromServer(clientDeviceID string)
