@@ -9,7 +9,7 @@ to export to C.
 ### Building
 `go build -buildmode=c-archive`.
 ### Functions
-All relevant exported libmutton functions have C functions of the same name.
+All relevant exported libmutton functions have C counterparts with similar names.
 Functions with multiple return values all have CGO-generated structs to store the return values.
 These structs are named `<FunctionName>_return`, as per CGO.
 All functions perform similar basic operations, with a couple caveats:
@@ -75,9 +75,9 @@ int main() {
     - [ ] CopyString(clearClipboardAutomatically bool, copySubject string) error
     - [ ] LaunchClearProcess(copySubject string)
     - [ ] TOTPCopier(secret string, errorChan chan<- error, done <-chan bool)
-- [ ] config
-    - [ ] Write(cfg *CfgT, appendMode bool) error
-    - [ ] Load() (*CfgT, error)
+- [X] config
+    - [X] Write(cfg *CfgT, appendMode bool) error
+    - [X] Load() (*CfgT, error)
 - [ ] core
     - [ ] EntryAddPrecheck(realPath string) (uint8, error)
     - [ ] EntryIsNotEmpty(entryData []string) bool
@@ -86,6 +86,7 @@ int main() {
     - [ ] GetOldEntryData(realPath string, field int, rcwPassword []byte) ([]string, error)
     - [ ] LibmuttonInit(inputCB func(prompt string) string, rcwPassword []byte, ...) error
     - [ ] RCWSanityCheckGen(password []byte) error
+    - [ ] VerifyEntries(rcwPassword []byte) error
     - [ ] WriteEntry(realPath string, decSlice []string, passwordIsNew bool, rcwPassword []byte) error
 - [X] crypt
     - [X] ~~VAR: RetryPassword bool~~ (RCWD not supported)

@@ -47,3 +47,19 @@ func FreeArray(items *C.PascalString, count C.int) {
 	}
 	C.free(unsafe.Pointer(items))
 }
+
+// safeStringDeref safely dereferences a string pointer, returning empty string if nil.
+func safeStringDeref(s *string) string {
+	if s == nil {
+		return ""
+	}
+	return *s
+}
+
+// safeBoolDeref safely dereferences a bool pointer, returning false if nil.
+func safeBoolDeref(b *bool) bool {
+	if b == nil {
+		return false
+	}
+	return *b
+}

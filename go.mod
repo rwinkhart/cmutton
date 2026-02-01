@@ -1,6 +1,6 @@
 module cmutton
 
-go 1.25.6
+go 1.26rc2
 
 require (
 	github.com/rwinkhart/libmutton v0.4.3-0.20260124190333-b963ccf33e54
