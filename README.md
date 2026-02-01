@@ -111,11 +111,11 @@ int main() {
     - [ ] ShearRemote(vanityPath string, onlyShearAgeFile bool) error
     - [ ] RunJob() (*syncListsT, error)
 - [ ] synccommon
-    - [ ] AddFolderLocal(vanityPath string) error
-    - [ ] RenameLocal(oldVanityPath, newVanityPath string) error
-    - [ ] ShearAgeFileLocal(vanityPath string) error
-    - [ ] ShearLocal(vanityPath, clientDeviceID string, onlyShearAgeFile bool) (string, bool, error)
+    - [X] ~~AddFolderLocal(vanityPath string) error~~ (not for use outside of libmutton)
+    - [X] ~~RenameLocal(oldVanityPath, newVanityPath string) error~~ (not for use outside of libmutton)
+    - [X] ~~ShearAgeFileLocal(vanityPath string) error~~ (not for use outside of libmutton)
+    - [X] ~~ShearLocal(vanityPath, clientDeviceID string, onlyShearAgeFile bool) (string, bool, error)~~ (not for use outside of libmutton)
     - [ ] WalkEntryDir() ([]string, []string, error)
-    - [ ] GetAllEntryData() (EntryMapT, error)
+    - [X] ~~GetAllEntryData() (EntryMapT, error)~~ (not easy to port to C; also not needed)
 - [ ] syncserver
     - [ ] GetRemoteDataFromServer(clientDeviceID string)

@@ -4,8 +4,6 @@ package main
 // #include "types.h"
 import "C"
 import (
-	"unsafe"
-
 	"github.com/rwinkhart/libmutton/crypt"
 	"github.com/rwinkhart/rcw/wrappers"
 )
@@ -28,16 +26,7 @@ func DecryptFileToSlice(realPath, rcwPassword C.PascalString) (*C.char, *C.Pasca
 		return nil, nil, 0
 	}
 
-	// allocate C array for PascalStrings
-	cLinesPtr := (*C.PascalString)(C.malloc(C.size_t(len(lines)) * C.size_t(C.sizeof_PascalString)))
-
-	// populate the array with the decrypted lines
-	cLinesSlice := (*[1 << 30]C.PascalString)(unsafe.Pointer(cLinesPtr))[:len(lines):len(lines)]
-	for i, line := range lines {
-		cLinesSlice[i] = getPascalString(line)
-	}
-
-	return nil, cLinesPtr, C.int(len(lines))
+	return nil, getCPascalStringArrayFromStringSlice(lines), C.int(len(lines))
 }
 
 // EncryptBytes returns:

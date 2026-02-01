@@ -27,6 +27,21 @@ func getPascalStringFromBytes(goBytes []byte) C.PascalString {
 	}
 }
 
+// getCPascalStringArrayFromStringSlice converts a Go slice
+// of strings to a C array of pascal strings.
+func getCPascalStringArrayFromStringSlice(goSlice []string) *C.PascalString {
+	// allocate C array for PascalStrings
+	cArrPtr := (*C.PascalString)(C.malloc(C.size_t(len(goSlice)) * C.size_t(C.sizeof_PascalString)))
+
+	// populate the array with the decrypted lines
+	cArr := (*[1 << 30]C.PascalString)(unsafe.Pointer(cArrPtr))[:len(goSlice):len(goSlice)]
+	for i := range goSlice {
+		cArr[i] = getPascalString(goSlice[i])
+	}
+
+	return cArrPtr
+}
+
 // GetPascalStringFromCString is a helper meant to be used from C.
 //
 //export GetPascalStringFromCString
