@@ -42,6 +42,16 @@ func getCPascalStringArrayFromStringSlice(goSlice []string) C.PascalStringArray 
 	return C.PascalStringArray{data: cArrPtr, len: C.int(len(goSlice))}
 }
 
+// getStringSliceFromCPascalStringArray converts a C.PascalStringArray to a go slice.
+func getStringSliceFromCPascalStringArray(pascalStringArray C.PascalStringArray) []string {
+	var goSlice []string
+	cArr := (*[1 << 30]C.PascalString)(unsafe.Pointer(pascalStringArray.data))[:pascalStringArray.len:pascalStringArray.len]
+	for i := 0; i < int(pascalStringArray.len); i++ {
+		goSlice = append(goSlice, C.GoStringN(cArr[i].data, cArr[i].len))
+	}
+	return goSlice
+}
+
 // GetPascalStringFromCString is a helper meant to be used from C.
 //
 //export GetPascalStringFromCString

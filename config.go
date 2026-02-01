@@ -8,6 +8,7 @@ import (
 )
 
 // LoadOfficialCfg returns the currently set (libmutton official) values in the libmutton config file.
+// Returns:
 // r0: err
 //
 // r1: OfflineMode (bool)
@@ -38,6 +39,7 @@ func LoadOfficialCfg() (*C.char, bool, C.PascalString, C.PascalString, C.PascalS
 }
 
 // WriteOfficialCfg writes the provided (libmutton official) values to the libmutton config file.
+// Returns:
 // r0: err
 //
 //export WriteOfficialCfg

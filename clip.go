@@ -9,7 +9,7 @@ import (
 
 // ClearProcess clears the clipboard in 30 seconds if its contents still match assignedContents.
 // If assignedContents is an empty string, the clipboard will clear immediately and unconditionally.
-//
+// Returns:
 // r0: err
 //
 //export ClearProcess

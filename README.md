@@ -78,16 +78,16 @@ int main() {
 - [X] config
     - [X] Write(cfg *CfgT, appendMode bool) error
     - [X] Load() (*CfgT, error)
-- [ ] core
-    - [ ] EntryAddPrecheck(realPath string) (uint8, error)
-    - [ ] EntryIsNotEmpty(entryData []string) bool
-    - [ ] EntryRefresh(oldRCWPassword, newRCWPassword []byte, removeOldDir bool) error
-    - [ ] GenTOTP(secret string, time time.Time) (string, error)
-    - [ ] GetOldEntryData(realPath string, field int, rcwPassword []byte) ([]string, error)
-    - [ ] LibmuttonInit(inputCB func(prompt string) string, rcwPassword []byte, ...) error
-    - [ ] RCWSanityCheckGen(password []byte) error
-    - [ ] VerifyEntries(rcwPassword []byte) error
-    - [ ] WriteEntry(realPath string, decSlice []string, passwordIsNew bool, rcwPassword []byte) error
+- [X] core
+    - [X] EntryAddPrecheck(realPath string) (uint8, error)
+    - [X] EntryIsNotEmpty(entryData []string) bool
+    - [X] EntryRefresh(oldRCWPassword, newRCWPassword []byte, removeOldDir bool) error
+    - [X] GenTOTP(secret string, time time.Time) (string, error)
+    - [X] GetOldEntryData(realPath string, field int, rcwPassword []byte) ([]string, error)
+    - [X] LibmuttonInit(inputCB func(prompt string) string, rcwPassword []byte, ...) error
+    - [X] RCWSanityCheckGen(password []byte) error
+    - [X] VerifyEntries(rcwPassword []byte) error
+    - [X] WriteEntry(realPath string, decSlice []string, passwordIsNew bool, rcwPassword []byte) error
 - [X] crypt
     - [X] ~~VAR: RetryPassword bool~~ (RCWD not supported)
     - [X] DecryptFileToSlice(realPath string) ([]string, error)
@@ -102,7 +102,7 @@ int main() {
     - [X] GetRealPath(vanityPath string) string
     - [X] ~~GetSysProcAttr() *syscall.SysProcAttr~~ (not for use outside of libmutton)
     - [X] GetVanityPath(realPath string) string
-- [ ] syncclient
+- [X] syncclient
     - [X] AddFolderRemote(vanityPath string) error
     - [X] GenDeviceID(oldDeviceID, prefix string) (string, string, bool, error)
     - [X] ~~GetSSHClient() (*ssh.Client, bool, *bool, *string, *string, error)~~ (not for use outside of libmutton)
