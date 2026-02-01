@@ -68,23 +68,17 @@ func GenDeviceID(oldDeviceID, prefix C.PascalString) (*C.char, C.PascalString, C
 // RunJob returns:
 // r0: err
 //
-// r1: deleteList (pointer to C-allocated array)
+// r1: deleteList
 //
-// r2: deleteList length
+// r2: downloadList
 //
-// r3: downloadList (pointer to C-allocated array)
-//
-// r4: downloadList length
-//
-// r5: uploadList (pointer to C-allocated array)
-//
-// r6: uploadList length
+// r3: uploadList
 //
 //export RunJob
-func RunJob() (*C.char, *C.PascalString, C.int, *C.PascalString, C.int, *C.PascalString, C.int) {
+func RunJob() (*C.char, C.PascalStringArray, C.PascalStringArray, C.PascalStringArray) {
 	lists, err := syncclient.RunJob()
 	if err != nil {
-		return C.CString(err.Error()), nil, 0, nil, 0, nil, 0
+		return C.CString(err.Error()), C.PascalStringArray{}, C.PascalStringArray{}, C.PascalStringArray{}
 	}
-	return nil, getCPascalStringArrayFromStringSlice(lists.Delete), C.int(len(lists.Delete)), getCPascalStringArrayFromStringSlice(lists.Download), C.int(len(lists.Download)), getCPascalStringArrayFromStringSlice(lists.Upload), C.int(len(lists.Upload))
+	return nil, getCPascalStringArrayFromStringSlice(lists.Delete), getCPascalStringArrayFromStringSlice(lists.Download), getCPascalStringArrayFromStringSlice(lists.Upload)
 }

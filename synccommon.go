@@ -13,39 +13,33 @@ import (
 // WalkEntryDir returns:
 // r0: err
 //
-// r1: files (pointer to C-allocated array)
+// r1: files
 //
-// r2: files length
-//
-// r3: dirs (pointer to C-allocated array)
-//
-// r4: dirs length
+// r2: dirs
 //
 //export WalkEntryDir
-func WalkEntryDir() (*C.char, *C.PascalString, C.int, *C.PascalString, C.int) {
+func WalkEntryDir() (*C.char, C.PascalStringArray, C.PascalStringArray) {
 	files, dirs, err := synccommon.WalkEntryDir()
 	if err != nil {
-		return C.CString(err.Error()), nil, 0, nil, 0
+		return C.CString(err.Error()), C.PascalStringArray{}, C.PascalStringArray{}
 	}
-	return nil, getCPascalStringArrayFromStringSlice(files), C.int(len(files)), getCPascalStringArrayFromStringSlice(dirs), C.int(len(dirs))
+	return nil, getCPascalStringArrayFromStringSlice(files), getCPascalStringArrayFromStringSlice(dirs)
 }
 
 // GetAllEntryData returns:
 // r0: err
 //
-// r1: vanityPaths (pointer to C-allocated array)
+// r1: vanityPaths
 //
-// r2: vanityPaths length
+// r2: translatedAges (pointer to C-allocated array)
 //
-// r3: translatedAges (pointer to C-allocated array)
-//
-// r4: translatedAges length
+// r3: translatedAges length
 //
 //export GetAllEntryData
-func GetAllEntryData() (*C.char, *C.PascalString, C.int, *uint8, C.int) {
+func GetAllEntryData() (*C.char, C.PascalStringArray, *uint8, C.int) {
 	entryMap, err := synccommon.GetAllEntryData()
 	if err != nil {
-		return C.CString(err.Error()), nil, 0, nil, 0
+		return C.CString(err.Error()), C.PascalStringArray{}, nil, 0
 	}
 	var vanityPaths []string
 	var translatedAges []uint8
@@ -53,5 +47,5 @@ func GetAllEntryData() (*C.char, *C.PascalString, C.int, *uint8, C.int) {
 		vanityPaths = append(vanityPaths, k)
 		translatedAges = append(translatedAges, age.TranslateAgeTimestamp(v.AgeTimestamp))
 	}
-	return nil, getCPascalStringArrayFromStringSlice(vanityPaths), C.int(len(vanityPaths)), (*uint8)(unsafe.Pointer(&translatedAges[0])), C.int(len(translatedAges))
+	return nil, getCPascalStringArrayFromStringSlice(vanityPaths), (*uint8)(unsafe.Pointer(&translatedAges[0])), C.int(len(translatedAges))
 }

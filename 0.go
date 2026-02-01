@@ -29,7 +29,7 @@ func getPascalStringFromBytes(goBytes []byte) C.PascalString {
 
 // getCPascalStringArrayFromStringSlice converts a Go slice
 // of strings to a C array of pascal strings.
-func getCPascalStringArrayFromStringSlice(goSlice []string) *C.PascalString {
+func getCPascalStringArrayFromStringSlice(goSlice []string) C.PascalStringArray {
 	// allocate C array for PascalStrings
 	cArrPtr := (*C.PascalString)(C.malloc(C.size_t(len(goSlice)) * C.size_t(C.sizeof_PascalString)))
 
@@ -39,7 +39,7 @@ func getCPascalStringArrayFromStringSlice(goSlice []string) *C.PascalString {
 		cArr[i] = getPascalString(goSlice[i])
 	}
 
-	return cArrPtr
+	return C.PascalStringArray{data: cArrPtr, len: C.int(len(goSlice))}
 }
 
 // GetPascalStringFromCString is a helper meant to be used from C.
@@ -55,12 +55,12 @@ func GetPascalStringFromCString(cString *C.char) C.PascalString {
 // FreeArray frees the memory allocated by a C-allocated array.
 //
 //export FreeArray
-func FreeArray(items *C.PascalString, count C.int) {
-	linesSlice := (*[1 << 30]C.PascalString)(unsafe.Pointer(items))[:count:count]
-	for i := 0; i < int(count); i++ {
+func FreeArray(array C.PascalStringArray) {
+	linesSlice := (*[1 << 30]C.PascalString)(unsafe.Pointer(array.data))[:array.len:array.len]
+	for i := 0; i < int(array.len); i++ {
 		C.free(unsafe.Pointer(linesSlice[i].data))
 	}
-	C.free(unsafe.Pointer(items))
+	C.free(unsafe.Pointer(array.data))
 }
 
 // safeStringDeref safely dereferences a string pointer, returning empty string if nil.

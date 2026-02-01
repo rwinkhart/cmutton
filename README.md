@@ -53,13 +53,13 @@ int main() {
         exit(1); // result.r0 not freed since program exits
     }
 
-    for (int i = 0; i < result.r2; i++) {
+    for (int i = 0; i < result.r1.len; i++) {
         // print Pascal string using "%.*s" with printf and supplying both length and data
-        printf("%.*s\n", result.r1[i].len, result.r1[i].data);
+        printf("%.*s\n", result.r1.data[i].len, result.r1.data[i].data);
     }
 
     // be sure to free the data!
-    FreeArray(result.r1, result.r2);
+    FreeArray(result.r1);
 }
 ```
 

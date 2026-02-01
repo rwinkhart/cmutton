@@ -6,4 +6,9 @@ typedef struct {
     int len;
 } PascalString;
 
+typedef struct {
+    PascalString* data;
+    int len;
+} PascalStringArray;
+
 #endif

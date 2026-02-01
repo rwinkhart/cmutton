@@ -11,22 +11,20 @@ import (
 // DecryptFileToSlice returns:
 // r0: err
 //
-// r1: decLines (pointer to C-allocated array)
-//
-// r2: decLines length
+// r1: decLines
 //
 //export DecryptFileToSlice
-func DecryptFileToSlice(realPath, rcwPassword C.PascalString) (*C.char, *C.PascalString, C.int) {
+func DecryptFileToSlice(realPath, rcwPassword C.PascalString) (*C.char, C.PascalStringArray) {
 	lines, err := crypt.DecryptFileToSlice(C.GoStringN(realPath.data, realPath.len), []byte(C.GoStringN(rcwPassword.data, rcwPassword.len)))
 	if err != nil {
-		return C.CString(err.Error()), nil, 0
+		return C.CString(err.Error()), C.PascalStringArray{}
 	}
 
 	if len(lines) == 0 {
-		return nil, nil, 0
+		return nil, C.PascalStringArray{}
 	}
 
-	return nil, getCPascalStringArrayFromStringSlice(lines), C.int(len(lines))
+	return nil, getCPascalStringArrayFromStringSlice(lines)
 }
 
 // EncryptBytes returns:
