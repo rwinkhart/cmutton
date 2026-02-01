@@ -13,7 +13,7 @@ import (
 //
 // r1: decLines (pointer to C-allocated array)
 //
-// r2: length decLines array
+// r2: decLines length
 //
 //export DecryptFileToSlice
 func DecryptFileToSlice(realPath, rcwPassword C.PascalString) (*C.char, *C.PascalString, C.int) {
