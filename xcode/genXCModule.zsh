@@ -1,9 +1,14 @@
 #!/usr/bin/env zsh
 # TODO Support iOS simulator
 
-# setup build dirs
+# setup working dirs w/modulemap
 rm -rf ./build
 mkdir -p ./build/{ios,macos}
+echo "module cmutton {
+    header "cmutton.h"
+    link "cmutton"
+    export *
+}" > ./build/{ios,macos}/module.modulemap
 
 # cd to Go source
 cd ..
@@ -18,11 +23,4 @@ CGO_ENABLED=1 GOOS=darwin go build -buildmode=c-archive
 mv ./{cmutton.a,cmutton.h} ./xcode/build/macos/
 cp ./types.h ./xcode/build/macos/
 
-# cd to xcode build dir and build XCFramework
-cd ./xcode/build
-xcodebuild -create-framework \
-    -library ./ios/cmutton.a \
-    -headers ./ios/cmutton.h \
-    -library ./macos/cmutton.a \
-    -headers ./macos/cmutton.h \
-    -output cmutton.xcframework
+cd ./xcode
