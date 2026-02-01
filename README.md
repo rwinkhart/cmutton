@@ -68,13 +68,13 @@ int main() {
     - [X] AllPasswordEntries(forceReage bool, rcwPassword []byte) error
     - [X] Entry(vanityPath string, timestamp int64) error
     - [X] TranslateAgeTimestamp(timestamp *int64) uint8
-- [ ] clip
-    - [ ] ClearArgument() error
-    - [ ] ClearProcess(assignedContents string) error
-    - [ ] CopyShortcut(realPath string, field int) error
-    - [ ] CopyString(clearClipboardAutomatically bool, copySubject string) error
-    - [ ] LaunchClearProcess(copySubject string)
-    - [ ] TOTPCopier(secret string, errorChan chan<- error, done <-chan bool)
+- [X] clip
+    - [X] ~~ClearArgument() error~~ (clipclear argument not supported)
+    - [X] ClearProcess(assignedContents string) error 
+    - [X] CopyShortcut(realPath string, field int) error
+    - [X] CopyString(clearClipboardAutomatically bool, copySubject string) error
+    - [X] ~~LaunchClearProcess(copySubject string)~~ (clipclear argument not supported)
+    - [X] ~~TOTPCopier(secret string, errorChan chan<- error, done <-chan bool)~~ (not supported due to complexity)
 - [X] config
     - [X] Write(cfg *CfgT, appendMode bool) error
     - [X] Load() (*CfgT, error)
@@ -117,5 +117,5 @@ int main() {
     - [X] ~~ShearLocal(vanityPath, clientDeviceID string, onlyShearAgeFile bool) (string, bool, error)~~ (not for use outside of libmutton)
     - [X] WalkEntryDir() ([]string, []string, error)
     - [X] GetAllEntryData() (EntryMapT, error)
-- [ ] syncserver
-    - [ ] GetRemoteDataFromServer(clientDeviceID string)
+- [X] syncserver
+    - [X] ~~GetRemoteDataFromServer(clientDeviceID string)~~ (not for use outside of libmutton)
