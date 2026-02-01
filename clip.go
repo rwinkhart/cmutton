@@ -1,3 +1,5 @@
+//go:build (!android && !ios) || termux
+
 package main
 
 // #include <stdlib.h>
