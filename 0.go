@@ -62,15 +62,22 @@ func GetPascalStringFromCString(cString *C.char) C.PascalString {
 	}
 }
 
-// FreeArray frees the memory allocated by a C-allocated array.
+// FreePascalArray frees the memory allocated by a C-allocated array.
 //
-//export FreeArray
-func FreeArray(array C.PascalStringArray) {
+//export FreePascalArray
+func FreePascalArray(array C.PascalStringArray) {
 	linesSlice := (*[1 << 30]C.PascalString)(unsafe.Pointer(array.data))[:array.len:array.len]
 	for i := 0; i < int(array.len); i++ {
 		C.free(unsafe.Pointer(linesSlice[i].data))
 	}
 	C.free(unsafe.Pointer(array.data))
+}
+
+// FreePascalString frees the memory allocated by a C-allocated pascal string.
+//
+//export FreePascalString
+func FreePascalString(pascalString C.PascalString) {
+	C.free(unsafe.Pointer(pascalString.data))
 }
 
 // safeStringDeref safely dereferences a string pointer, returning empty string if nil.
