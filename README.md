@@ -87,7 +87,7 @@ int main() {
     - [X] EntryRefresh(oldRCWPassword, newRCWPassword []byte, removeOldDir bool) error
     - [X] GenTOTP(secret string, time time.Time) (string, error)
     - [X] GetOldEntryData(realPath string, field int, rcwPassword []byte) ([]string, error)
-    - [X] LibmuttonInit(inputCB func(prompt string) string, rcwPassword []byte, ...) error
+    - [X] ~~LibmuttonInit(inputCB func(prompt string) string, rcwPassword []byte, ...) error~~ (should be performed manually)
     - [X] RCWSanityCheckGen(password []byte) error
     - [X] VerifyEntries(rcwPassword []byte) error
     - [X] WriteEntry(realPath string, decSlice []string, passwordIsNew bool, rcwPassword []byte) error

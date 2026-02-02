@@ -4,7 +4,6 @@ package main
 // #include "types.h"
 import "C"
 import (
-	"strings"
 	"time"
 
 	"github.com/rwinkhart/libmutton/core"
@@ -71,38 +70,6 @@ func GetOldEntryData(realPath C.PascalString, field int, rcwPassword C.PascalStr
 		return C.CString(err.Error()), C.PascalStringArray{}
 	}
 	return nil, getCPascalStringArrayFromStringSlice(lines)
-}
-
-// LibmuttonInit is a partial implementation that does not allow for client-specific config.
-// Returns:
-// r0: err
-//
-// Special requirement:
-// An array of ordered responses to inputCB questions.
-//
-//export LibmuttonInit
-func LibmuttonInit(configSSH, sshKeyPath, sshKeyProtected, sshUser, sshHost, sshPort, rcwPassword C.PascalString, appendMode bool, forceOfflineMode bool, deviceIDPrefix C.PascalString) *C.char {
-	supplyInputForInit := func(prompt string) string {
-		if strings.HasPrefix(prompt, "Configure SSH settings (for synchronization)? (Y/n)") {
-			return C.GoStringN(configSSH.data, configSSH.len)
-		} else if strings.HasPrefix(prompt, "SSH private identity file path (falls back to") {
-			return C.GoStringN(sshKeyPath.data, sshKeyPath.len)
-		} else if strings.HasPrefix(prompt, "Is the identity file password-protected? (y/N)") {
-			return C.GoStringN(sshKeyProtected.data, sshKeyProtected.len)
-		} else if strings.HasPrefix(prompt, "Remote SSH username:") {
-			return C.GoStringN(sshUser.data, sshUser.len)
-		} else if strings.HasPrefix(prompt, "Remote SSH IP/domain:") {
-			return C.GoStringN(sshHost.data, sshHost.len)
-		} else if strings.HasPrefix(prompt, "Remote SSH port:") {
-			return C.GoStringN(sshPort.data, sshPort.len)
-		}
-		return ""
-	}
-
-	if err := core.LibmuttonInit(supplyInputForInit, []byte(C.GoStringN(rcwPassword.data, rcwPassword.len)), appendMode, forceOfflineMode, C.GoStringN(deviceIDPrefix.data, deviceIDPrefix.len), nil); err != nil {
-		return C.CString(err.Error())
-	}
-	return nil
 }
 
 // RCWSanityCheckGen returns:
