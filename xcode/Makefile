@@ -1,44 +1,42 @@
-clean:
-	rm -rf ./cmutton*
+BUILD_DIR = ./copy-contents-to-xcode
 
-ios-hw:
+clean:
+	rm -rf $(BUILD_DIR)
+
+ios-hw: clean
+	mkdir -p $(BUILD_DIR)
 	CGO_ENABLED=1 \
 	GOOS=darwin \
 	GOARCH=arm64 \
+	GOARM64=v8.3,crypto \
 	SDK=iphoneos \
 	CC=$(PWD)/clangwrap.sh \
 	CGO_CFLAGS="-fembed-bitcode" \
-	go build -buildmode=c-archive -tags ios -o ./cmutton-ios-hw.a ..
+	go build -buildmode=c-archive -tags ios -o $(BUILD_DIR)/cmutton-ios-hw.a ..
+	echo '#import "types.h"\n#import "cmutton.h"' > $(BUILD_DIR)/cmutton-Bridging-Header-ios-hw.h
+	cp ../types.h $(BUILD_DIR)/types.h
 
-ios-sim:
+ios-sim: clean
+	mkdir -p $(BUILD_DIR)
 	CGO_ENABLED=1 \
 	GOOS=darwin \
 	GOARCH=arm64 \
+	GOARM64=v8.4,crypto \
 	SDK=iphonesimulator \
 	CC=$(PWD)/clangwrap.sh \
-	go build -buildmode=c-archive -tags ios -o ./cmutton-ios-sim.a ..
+	go build -buildmode=c-archive -tags ios -o $(BUILD_DIR)/cmutton-ios-sim.a ..
+	echo '#import "types.h"\n#import "cmutton.h"' > $(BUILD_DIR)/cmutton-Bridging-Header-ios-sim.h
+	cp ../types.h $(BUILD_DIR)/types.h
 
-macos:
+macos: clean
+	mkdir -p $(BUILD_DIR)
 	CGO_ENABLED=1 \
 	GOOS=darwin \
 	GOARCH=arm64 \
+	GOARM64=v8.4,crypto \
 	SDK=macosx \
-	go build -buildmode=c-archive -o ./cmutton-macos-arm64.a ..
+	go build -buildmode=c-archive -o $(BUILD_DIR)/cmutton-macos.a ..
+	echo '#import "types.h"\n#import "cmutton.h"' > $(BUILD_DIR)/cmutton-Bridging-Header-macos.h
+	cp ../types.h $(BUILD_DIR)/types.h
 
-ios: ios-hw ios-sim
-	xcodebuild -create-xcframework \
-	-library ./cmutton-ios-hw.a \
-	-headers ./cmutton-ios-hw.h \
-	-library ./cmutton-ios-sim.a \
-	-headers ./cmutton-ios-sim.h \
-	-output ./cmutton.xcframework
-
-apple: ios-hw ios-sim macos
-	xcodebuild -create-xcframework \
-	-library ./cmutton-ios-hw.a \
-	-headers ./cmutton-ios-hw.h \
-	-library ./cmutton-ios-sim.a \
-	-headers ./cmutton-ios-sim.h \
-	-library ./cmutton-macos-arm64.a \
-	-headers ./cmutton-macos-arm64.h \
-	-output ./cmutton.xcframework
+apple: clean ios-hw ios-sim macos
