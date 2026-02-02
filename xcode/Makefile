@@ -6,7 +6,7 @@ clean:
 ios-hw: clean
 	mkdir -p $(BUILD_DIR)
 	CGO_ENABLED=1 \
-	GOOS=darwin \
+	GOOS=ios \
 	GOARCH=arm64 \
 	GOARM64=v8.3,crypto \
 	SDK=iphoneos \
@@ -19,7 +19,7 @@ ios-hw: clean
 ios-sim: clean
 	mkdir -p $(BUILD_DIR)
 	CGO_ENABLED=1 \
-	GOOS=darwin \
+	GOOS=ios \
 	GOARCH=arm64 \
 	GOARM64=v8.4,crypto \
 	SDK=iphonesimulator \
