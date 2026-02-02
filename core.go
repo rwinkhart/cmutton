@@ -81,21 +81,20 @@ func GetOldEntryData(realPath C.PascalString, field int, rcwPassword C.PascalStr
 // An array of ordered responses to inputCB questions.
 //
 //export LibmuttonInit
-func LibmuttonInit(inputCBResponses C.PascalStringArray, rcwPassword C.PascalString, appendMode bool, forceOfflineMode bool, deviceIDPrefix C.PascalString) *C.char {
-	inputCBRespSlice := getStringSliceFromCPascalStringArray(inputCBResponses)
+func LibmuttonInit(configSSH, sshKeyPath, sshKeyProtected, sshUser, sshHost, sshPort, rcwPassword C.PascalString, appendMode bool, forceOfflineMode bool, deviceIDPrefix C.PascalString) *C.char {
 	supplyInputForInit := func(prompt string) string {
 		if strings.HasPrefix(prompt, "Configure SSH settings (for synchronization)? (Y/n)") {
-			return inputCBRespSlice[0]
+			return C.GoStringN(configSSH.data, configSSH.len)
 		} else if strings.HasPrefix(prompt, "SSH private identity file path (falls back to") {
-			return inputCBRespSlice[1]
+			return C.GoStringN(sshKeyPath.data, sshKeyPath.len)
 		} else if strings.HasPrefix(prompt, "Is the identity file password-protected? (y/N)") {
-			return inputCBRespSlice[2]
+			return C.GoStringN(sshKeyProtected.data, sshKeyProtected.len)
 		} else if strings.HasPrefix(prompt, "Remote SSH username:") {
-			return inputCBRespSlice[3]
+			return C.GoStringN(sshUser.data, sshUser.len)
 		} else if strings.HasPrefix(prompt, "Remote SSH IP/domain:") {
-			return inputCBRespSlice[4]
+			return C.GoStringN(sshHost.data, sshHost.len)
 		} else if strings.HasPrefix(prompt, "Remote SSH port:") {
-			return inputCBRespSlice[5]
+			return C.GoStringN(sshPort.data, sshPort.len)
 		}
 		return ""
 	}
