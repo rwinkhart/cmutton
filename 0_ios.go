@@ -10,7 +10,7 @@ import (
 
 func init() {
 	// get the app's Library/Application Support directory (private, not backed up by iCloud)
-	back.Home = filepath.Join(back.Home, "Library", "Application Support", "Passture")
+	back.Home = filepath.Join(back.Home, "Library", "Application Support", "cmutton-ios")
 
 	// change path variables to account for iOS app sandbox
 	global.EntryRoot = back.Home + "/entries"             // Path to libmutton entry directory
