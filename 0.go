@@ -95,3 +95,5 @@ func safeBoolDeref(b *bool) bool {
 	}
 	return *b
 }
+
+func main() {}

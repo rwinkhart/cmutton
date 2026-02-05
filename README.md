@@ -98,6 +98,7 @@ int main() {
     - [X] ~~RCWDArgument()~~ (RCWD not supported)
 - [X] global
     - [X] ~~VAR (CB func): GetPassword~~ (RCWD not supported)
+    - [X] VAR LibmuttonVersion (GetVersion())
     - [X] DirInit(preserveOldCfgDir bool) (string, error)
     - [X] ~~GenDeviceIDList() ([]fs.DirEntry, error)~~ (not for use outside of libmutton)
     - [X] GetCurrentDeviceID() (string, error)

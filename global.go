@@ -65,4 +65,10 @@ func GetVanityPath(realPath *C.char) C.PascalString {
 	return getPascalString(global.GetVanityPath(C.GoString(realPath)))
 }
 
-func main() {}
+// GetVersion returns:
+// versionNumber
+//
+//export GetVersion
+func GetVersion() *C.char {
+	return C.CString(global.LibmuttonVersion)
+}
