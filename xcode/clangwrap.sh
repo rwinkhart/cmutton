@@ -1,6 +1,6 @@
 #!/bin/sh
 
-MIN_VERSION=26.0
+MIN_VERSION=26.2
 
 SDK_PATH=`xcrun --sdk $SDK --show-sdk-path`
 CLANG=`xcrun --sdk $SDK --find clang`
