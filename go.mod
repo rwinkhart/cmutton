@@ -1,6 +1,6 @@
 module cmutton
 
-go 1.26rc2
+go 1.26rc3
 
 require (
 	github.com/rwinkhart/go-boilerplate v0.2.2
