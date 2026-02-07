@@ -13,7 +13,7 @@ ios-hw: clean
 	SDK=iphoneos \
 	CC=$(PWD)/clangwrap.sh \
 	CGO_CFLAGS="-fembed-bitcode" \
-	go build -buildmode=c-archive -tags ios -o $(BUILD_DIR)/cmutton-ios-hw.a ..
+	go build -buildmode=c-archive -tags interactive,ios -o $(BUILD_DIR)/cmutton-ios-hw.a ..
 	echo '#import "types.h"\n#import "cmutton-ios-hw.h"' > $(BUILD_DIR)/cmutton-Bridging-Header-ios-hw.h
 	cp ../types.h $(BUILD_DIR)/types.h
 
@@ -26,7 +26,7 @@ ios-sim: clean
 	GOFLAGS='-trimpath "-ldflags=-s -w" -buildvcs=false' \
 	SDK=iphonesimulator \
 	CC=$(PWD)/clangwrap.sh \
-	go build -buildmode=c-archive -tags ios -o $(BUILD_DIR)/cmutton-ios-sim.a ..
+	go build -buildmode=c-archive -tags interactive,ios -o $(BUILD_DIR)/cmutton-ios-sim.a ..
 	echo '#import "types.h"\n#import "cmutton-ios-sim.h"' > $(BUILD_DIR)/cmutton-Bridging-Header-ios-sim.h
 	cp ../types.h $(BUILD_DIR)/types.h
 
@@ -38,7 +38,7 @@ macos: clean
 	GOARM64=v8.4,crypto \
 	GOFLAGS='-trimpath "-ldflags=-s -w" -buildvcs=false' \
 	SDK=macosx \
-	go build -buildmode=c-archive -o $(BUILD_DIR)/cmutton-macos.a ..
+	go build -buildmode=c-archive -tags interactive -o $(BUILD_DIR)/cmutton-macos.a ..
 	echo '#import "types.h"\n#import "cmutton-macos.h"' > $(BUILD_DIR)/cmutton-Bridging-Header-macos.h
 	cp ../types.h $(BUILD_DIR)/types.h
 
