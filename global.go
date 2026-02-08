@@ -69,14 +69,16 @@ func GetVanityPath(realPath *C.char) C.PascalString {
 // versionNumber
 //
 //export GetVersion
-func GetVersion() *C.char {
-	return C.CString(global.LibmuttonVersion)
-}
+func GetVersion() *C.char { return C.CString(global.LibmuttonVersion) }
 
 // GetSSHDirPath returns:
 // sshDirPath
 //
 //export GetSSHDirPath
-func GetSSHDirPath() C.PascalString {
-	return getPascalString(global.SSHDir)
-}
+func GetSSHDirPath() C.PascalString { return getPascalString(global.SSHDir) }
+
+// GetEntryRootPath returns:
+// entryRootPath
+//
+//export GetEntryRootPath
+func GetEntryRootPath() C.PascalString { return getPascalString(global.EntryRoot) }
