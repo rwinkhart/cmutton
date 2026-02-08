@@ -20,7 +20,7 @@ import (
 func SetPrivKeyDataAndEraseFreeInput(privKeyData C.PascalString) {
 	privKeyDataPtr := unsafe.Pointer(privKeyData.data)
 	privkey.SetBytes(C.GoBytes(privKeyDataPtr, privKeyData.len))
-	securePtrOverwriteAndFree(privKeyDataPtr, privKeyData.len)
+	securePtrOverwriteAndFree(privKeyDataPtr, C.size_t(privKeyData.len))
 	FreePascalString(privKeyData)
 }
 
@@ -46,6 +46,6 @@ func GetPrivKeyDataAndEraseGoCopy() C.PascalString {
 //
 //export EraseFreePrivKeyPascal
 func EraseFreePrivKeyPascal(privKeyPascal C.PascalString) {
-	securePtrOverwriteAndFree(unsafe.Pointer(privKeyPascal.data), privKeyPascal.len)
+	securePtrOverwriteAndFree(unsafe.Pointer(privKeyPascal.data), C.size_t(privKeyPascal.len))
 	FreePascalString(privKeyPascal)
 }

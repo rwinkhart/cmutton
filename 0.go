@@ -97,10 +97,4 @@ func safeBoolDeref(b *bool) bool {
 	return *b
 }
 
-// securePtrOverwrite securely overwrites the memory at the input pointer and then frees it.
-func securePtrOverwriteAndFree(input unsafe.Pointer, length C.int) {
-	C.explicit_bzero(input, C.size_t(length))
-	C.free(input)
-}
-
 func main() {}
