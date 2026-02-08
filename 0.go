@@ -43,12 +43,13 @@ func getCPascalStringArrayFromStringSlice(goSlice []string) C.PascalStringArray 
 }
 
 // getStringSliceFromCPascalStringArray converts a C.PascalStringArray to a go slice.
-func getStringSliceFromCPascalStringArray(pascalStringArray C.PascalStringArray) []string {
+func getStringSliceFromCPascalStringArrayAndFree(pascalStringArray C.PascalStringArray) []string {
 	var goSlice []string
 	cArr := (*[1 << 30]C.PascalString)(unsafe.Pointer(pascalStringArray.data))[:pascalStringArray.len:pascalStringArray.len]
 	for i := 0; i < int(pascalStringArray.len); i++ {
 		goSlice = append(goSlice, C.GoStringN(cArr[i].data, cArr[i].len))
 	}
+	FreePascalArray(pascalStringArray)
 	return goSlice
 }
 
@@ -94,6 +95,12 @@ func safeBoolDeref(b *bool) bool {
 		return false
 	}
 	return *b
+}
+
+// securePtrOverwrite securely overwrites the memory at the input pointer and then frees it.
+func securePtrOverwriteAndFree(input unsafe.Pointer, length C.int) {
+	C.explicit_bzero(input, C.size_t(length))
+	C.free(input)
 }
 
 func main() {}

@@ -4,6 +4,8 @@ package main
 // #include "types.h"
 import "C"
 import (
+	"unsafe"
+
 	"github.com/rwinkhart/libmutton/crypt"
 	"github.com/rwinkhart/rcw/wrappers"
 )
@@ -15,7 +17,7 @@ import (
 //
 //export DecryptFileToSlice
 func DecryptFileToSlice(realPath, rcwPassword C.PascalString) (*C.char, C.PascalStringArray) {
-	lines, err := crypt.DecryptFileToSlice(C.GoStringN(realPath.data, realPath.len), []byte(C.GoStringN(rcwPassword.data, rcwPassword.len)))
+	lines, err := crypt.DecryptFileToSlice(C.GoStringN(realPath.data, realPath.len), C.GoBytes(unsafe.Pointer(rcwPassword.data), rcwPassword.len))
 	if err != nil {
 		return C.CString(err.Error()), C.PascalStringArray{}
 	}
@@ -33,6 +35,6 @@ func DecryptFileToSlice(realPath, rcwPassword C.PascalString) (*C.char, C.Pascal
 //export EncryptBytes
 func EncryptBytes(decBytes, rcwPassword C.PascalString) C.PascalString {
 	// use wrappers.Encrypt directly since C bindings do no support the RCWD daemon
-	encBytes := wrappers.Encrypt([]byte(C.GoStringN(decBytes.data, decBytes.len)), []byte(C.GoStringN(rcwPassword.data, rcwPassword.len)))
+	encBytes := wrappers.Encrypt(C.GoBytes(unsafe.Pointer(decBytes.data), decBytes.len), C.GoBytes(unsafe.Pointer(rcwPassword.data), rcwPassword.len))
 	return getPascalStringFromBytes(encBytes)
 }

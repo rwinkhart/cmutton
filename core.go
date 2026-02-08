@@ -5,6 +5,7 @@ package main
 import "C"
 import (
 	"time"
+	"unsafe"
 
 	"github.com/rwinkhart/libmutton/core"
 )
@@ -28,7 +29,7 @@ func EntryAddPrecheck(realPath C.PascalString) (*C.char, uint8) {
 //
 //export EntryIsNotEmpty
 func EntryIsNotEmpty(entryData C.PascalStringArray) bool {
-	notEmpty := core.EntryIsNotEmpty(getStringSliceFromCPascalStringArray(entryData))
+	notEmpty := core.EntryIsNotEmpty(getStringSliceFromCPascalStringArrayAndFree(entryData))
 	return notEmpty
 }
 
@@ -37,7 +38,7 @@ func EntryIsNotEmpty(entryData C.PascalStringArray) bool {
 //
 //export EntryRefresh
 func EntryRefresh(oldRCWPassword, newRCWPassword C.PascalString, removeOldDir bool) *C.char {
-	err := core.EntryRefresh([]byte(C.GoStringN(oldRCWPassword.data, oldRCWPassword.len)), []byte(C.GoStringN(newRCWPassword.data, newRCWPassword.len)), removeOldDir)
+	err := core.EntryRefresh(C.GoBytes(unsafe.Pointer(oldRCWPassword.data), oldRCWPassword.len), C.GoBytes(unsafe.Pointer(newRCWPassword.data), newRCWPassword.len), removeOldDir)
 	if err != nil {
 		return C.CString(err.Error())
 	}
@@ -65,7 +66,7 @@ func GenTOTP(secret C.PascalString, unixTimestamp int64) (*C.char, C.PascalStrin
 //
 //export GetOldEntryData
 func GetOldEntryData(realPath C.PascalString, field int, rcwPassword C.PascalString) (*C.char, C.PascalStringArray) {
-	lines, err := core.GetOldEntryData(C.GoStringN(realPath.data, realPath.len), field, []byte(C.GoStringN(rcwPassword.data, rcwPassword.len)))
+	lines, err := core.GetOldEntryData(C.GoStringN(realPath.data, realPath.len), field, C.GoBytes(unsafe.Pointer(rcwPassword.data), rcwPassword.len))
 	if err != nil {
 		return C.CString(err.Error()), C.PascalStringArray{}
 	}
@@ -77,7 +78,7 @@ func GetOldEntryData(realPath C.PascalString, field int, rcwPassword C.PascalStr
 //
 //export RCWSanityCheckGen
 func RCWSanityCheckGen(password C.PascalString) *C.char {
-	err := core.RCWSanityCheckGen([]byte(C.GoStringN(password.data, password.len)))
+	err := core.RCWSanityCheckGen(C.GoBytes(unsafe.Pointer(password.data), password.len))
 	if err != nil {
 		return C.CString(err.Error())
 	}
@@ -89,7 +90,7 @@ func RCWSanityCheckGen(password C.PascalString) *C.char {
 //
 //export VerifyEntries
 func VerifyEntries(rcwPassword C.PascalString) *C.char {
-	err := core.VerifyEntries([]byte(C.GoStringN(rcwPassword.data, rcwPassword.len)))
+	err := core.VerifyEntries(C.GoBytes(unsafe.Pointer(rcwPassword.data), rcwPassword.len))
 	if err != nil {
 		return C.CString(err.Error())
 	}
@@ -101,7 +102,7 @@ func VerifyEntries(rcwPassword C.PascalString) *C.char {
 //
 //export WriteEntry
 func WriteEntry(realPath C.PascalString, decSlice C.PascalStringArray, passwordIsNew bool, rcwPassword C.PascalString) *C.char {
-	if err := core.WriteEntry(C.GoStringN(realPath.data, realPath.len), getStringSliceFromCPascalStringArray(decSlice), passwordIsNew, []byte(C.GoStringN(rcwPassword.data, rcwPassword.len))); err != nil {
+	if err := core.WriteEntry(C.GoStringN(realPath.data, realPath.len), getStringSliceFromCPascalStringArrayAndFree(decSlice), passwordIsNew, C.GoBytes(unsafe.Pointer(rcwPassword.data), rcwPassword.len)); err != nil {
 		return C.CString(err.Error())
 	}
 	return nil

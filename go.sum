@@ -14,10 +14,10 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/pquerna/otp v1.5.0 h1:NMMR+WrmaqXU4EzdGJEE1aUUI0AMRzsp96fFFWNPwxs=
 github.com/pquerna/otp v1.5.0/go.mod h1:dkJfzwRKNiegxyNb54X/3fLwhCynbMspSyWKnvi1AEg=
-github.com/rwinkhart/go-boilerplate v0.2.2 h1:SVHTAQU+HWFivtUnDBcfrgClJV5ZmHyFS7/uERh7NKU=
-github.com/rwinkhart/go-boilerplate v0.2.2/go.mod h1:/NVRKGslU20E5xU5YOgXzWxA6aa94BMtv5MtHRTb5Ek=
-github.com/rwinkhart/libmutton v0.4.3-0.20260208003646-25edd344c861 h1:eDEH43Ch0/tSoAU+t2c4QYK9B3d4gMi9LVqUfr8ET5E=
-github.com/rwinkhart/libmutton v0.4.3-0.20260208003646-25edd344c861/go.mod h1:Z1QDejdTmI/ydQtnu5jUYZszAeT30AtXPDm0wkowAu0=
+github.com/rwinkhart/go-boilerplate v0.2.3-0.20260208035402-e1bb0012a781 h1:kMAM0fkWGPa8WK7A4a9rMX2oD2Lv198zJoD9LCUAzOA=
+github.com/rwinkhart/go-boilerplate v0.2.3-0.20260208035402-e1bb0012a781/go.mod h1:QcUlr4SMgONRMKD965m8oTuCa6ZJVAc17w27Qopyr+s=
+github.com/rwinkhart/libmutton v0.4.3-0.20260208040332-7bfbc7ef309e h1:Hl/LG+vc7RkU4tHVq+rMt15zg4t3utDZN6HY5RfPDPY=
+github.com/rwinkhart/libmutton v0.4.3-0.20260208040332-7bfbc7ef309e/go.mod h1:G9EvjsHvTyOvUOs1VZ8aRKRpRRgzrrdZSCGheL/t72I=
 github.com/rwinkhart/peercred-mini v0.1.2 h1:4cGWDbv0whvLeVvbUdx84V/9p+2fS+DEXgrA1KxlRFo=
 github.com/rwinkhart/peercred-mini v0.1.2/go.mod h1:LLHG7YshHEpbpJJP+Il9nx2dnGj5O3VGE32rWmflj0c=
 github.com/rwinkhart/rcw v0.2.5 h1:3GJeii9sDZsZNL+HRkfHrnbgxnaB8a9kejiMIfPXnpE=

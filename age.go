@@ -4,6 +4,8 @@ package main
 // #include "types.h"
 import "C"
 import (
+	"unsafe"
+
 	"github.com/rwinkhart/libmutton/age"
 )
 
@@ -23,7 +25,7 @@ func AgeEntry(vanityPath C.PascalString, timestamp int64) *C.char {
 //
 //export AgeAllPasswordEntries
 func AgeAllPasswordEntries(forceReage bool, rcwPassword C.PascalString) *C.char {
-	if err := age.AllPasswordEntries(forceReage, []byte(C.GoStringN(rcwPassword.data, rcwPassword.len))); err != nil {
+	if err := age.AllPasswordEntries(forceReage, C.GoBytes(unsafe.Pointer(rcwPassword.data), rcwPassword.len)); err != nil {
 		return C.CString(err.Error())
 	}
 	return nil

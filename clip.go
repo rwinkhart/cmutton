@@ -6,6 +6,8 @@ package main
 // #include "types.h"
 import "C"
 import (
+	"unsafe"
+
 	"github.com/rwinkhart/libmutton/clip"
 )
 
@@ -27,7 +29,7 @@ func ClearProcess(assignedContents C.PascalString) *C.char {
 //
 //export CopyShortcut
 func CopyShortcut(realPath C.PascalString, field int, rcwPassword C.PascalString) *C.char {
-	if err := clip.CopyShortcut(C.GoStringN(realPath.data, realPath.len), field, []byte(C.GoStringN(rcwPassword.data, rcwPassword.len))); err != nil {
+	if err := clip.CopyShortcut(C.GoStringN(realPath.data, realPath.len), field, C.GoBytes(unsafe.Pointer(rcwPassword.data), rcwPassword.len)); err != nil {
 		return C.CString(err.Error())
 	}
 	return nil
