@@ -7,7 +7,6 @@ import "C"
 import (
 	"unsafe"
 
-	"github.com/rwinkhart/go-boilerplate/back"
 	"github.com/rwinkhart/libmutton/privkey"
 )
 
@@ -24,18 +23,11 @@ func SetPrivKeyDataAndEraseFreeInput(privKeyData C.PascalString) {
 	FreePascalString(privKeyData)
 }
 
-// EraseFreePrivKey is meant to be called on iOS after
+// EraseGoPrivKey is meant to be called on iOS after
 // any server connections to ensure the cached SSH private key
 // set by SetPrivKeyDataAndEraseFreeInput is securely erased.
-// It also erases and frees the input privKeyPascal.
 //
-//export EraseFreePrivKey
-func EraseFreePrivKey(privKeyPascal C.PascalString) {
-	// erase Go/libmutton copy
-	privKeyBytes, _ := privkey.GetBytes(nil)
-	back.EraseBytesSecurely(privKeyBytes)
-
-	// erase C copy
-	securePtrOverwriteAndFree(unsafe.Pointer(privKeyPascal.data), C.size_t(privKeyPascal.len))
-	FreePascalString(privKeyPascal)
+//export EraseGoPrivKey
+func EraseGoPrivKey() {
+	privkey.Erase()
 }
