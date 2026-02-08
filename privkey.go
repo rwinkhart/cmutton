@@ -24,28 +24,18 @@ func SetPrivKeyDataAndEraseFreeInput(privKeyData C.PascalString) {
 	FreePascalString(privKeyData)
 }
 
-// GetPrivKeyDataAndEraseGoCopy will return nil on non-iOS platforms.
-// On iOS, it will return whatever was set in
-// SetPrivKeyDataAndSecurelyFreeInput.
+// EraseFreePrivKey is meant to be called on iOS after
+// any server connections to ensure the cached SSH private key
+// set by SetPrivKeyDataAndEraseFreeInput is securely erased.
+// It also erases and frees the input privKeyPascal.
 //
-// Don't forget to call EraseFreePrivKeyPascal on the output
-// of this function as soon as it is no longer needed.
-//
-//export GetPrivKeyDataAndEraseGoCopy
-func GetPrivKeyDataAndEraseGoCopy() C.PascalString {
+//export EraseFreePrivKey
+func EraseFreePrivKey(privKeyPascal C.PascalString) {
+	// erase Go/libmutton copy
 	privKeyBytes, _ := privkey.GetBytes(nil)
-	privKeyPascal := getPascalStringFromBytes(privKeyBytes)
 	back.EraseBytesSecurely(privKeyBytes)
-	return privKeyPascal
-}
 
-// EraseFreePrivKeyPascal is meant to be called on
-// iOS after any server connections to ensure the cached SSH private key
-// set by SetPrivKeyData is securely erased. It also erases and frees
-// the input privKeyData C.PascalString.
-//
-//export EraseFreePrivKeyPascal
-func EraseFreePrivKeyPascal(privKeyPascal C.PascalString) {
+	// erase C copy
 	securePtrOverwriteAndFree(unsafe.Pointer(privKeyPascal.data), C.size_t(privKeyPascal.len))
 	FreePascalString(privKeyPascal)
 }
