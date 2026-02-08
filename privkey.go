@@ -9,9 +9,10 @@ import (
 	"github.com/rwinkhart/libmutton/privkey"
 )
 
-// SetPrivKeyBytes forces libmutton to use custom bytes for the SSH private key.
+// SetPrivKeyBytesAndFree forces libmutton to use custom bytes for the SSH private key.
 //
-//export SetPrivKeyBytes
-func SetPrivKeyBytes(privKeyPascal C.PascalString) {
+//export SetPrivKeyBytesAndFree
+func SetPrivKeyBytesAndFree(privKeyPascal C.PascalString) {
 	privkey.SetBytes(C.GoBytes(unsafe.Pointer(privKeyPascal.data), privKeyPascal.len))
+	FreePascalString(privKeyPascal)
 }
