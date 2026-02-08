@@ -3,7 +3,7 @@ module cmutton
 go 1.26rc3
 
 require (
-	github.com/rwinkhart/libmutton v0.4.3-0.20260208045259-4602c295181e
+	github.com/rwinkhart/libmutton v0.4.3-0.20260208050303-cdb5bd562142
 	github.com/rwinkhart/rcw v0.2.5
 )
 
