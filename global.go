@@ -4,6 +4,7 @@ package main
 // #include "types.h"
 import "C"
 import (
+	"github.com/rwinkhart/go-boilerplate/back"
 	"github.com/rwinkhart/libmutton/global"
 )
 
@@ -82,3 +83,9 @@ func GetSSHDirPath() C.PascalString { return getPascalString(global.SSHDir) }
 //
 //export GetEntryRootPath
 func GetEntryRootPath() C.PascalString { return getPascalString(global.EntryRoot) }
+
+// GetHomePath returns:
+// homePath
+//
+//export GetHomePath
+func GetHomePath() C.PascalString { return getPascalString(back.Home) }
