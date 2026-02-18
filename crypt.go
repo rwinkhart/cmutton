@@ -33,8 +33,8 @@ func DecryptFileToSlice(realPath, rcwPassword C.PascalString) (*C.char, C.Pascal
 // encBytes
 //
 //export EncryptBytes
-func EncryptBytes(decBytes, rcwPassword C.PascalString) C.PascalString {
-	// use wrappers.Encrypt directly since C bindings do no support the RCWD daemon
-	encBytes := wrappers.Encrypt(C.GoBytes(unsafe.Pointer(decBytes.data), decBytes.len), C.GoBytes(unsafe.Pointer(rcwPassword.data), rcwPassword.len))
+func EncryptBytes(decBytes, rcwPassword C.PascalString, zeroizeDecBytes, zeroizePassword bool) C.PascalString {
+	// use wrappers.Encrypt directly since C bindings do not support the RCWD daemon
+	encBytes := wrappers.Encrypt(C.GoBytes(unsafe.Pointer(decBytes.data), decBytes.len), C.GoBytes(unsafe.Pointer(rcwPassword.data), rcwPassword.len), zeroizeDecBytes, zeroizePassword)
 	return getPascalStringFromBytes(encBytes)
 }

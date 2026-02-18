@@ -8,7 +8,7 @@ to export to C.
 # Usage
 ### Building
 #### Generic
-`go build -buildmode=c-archive`.
+`CGO_ENABLED=1 go build -buildmode=c-archive`.
 #### Apple Platforms (iOS/iOS Simulator/MacOS)
 If building for Apple platforms, use the `Makefile` in the `xcode` directory.
 ### Functions
